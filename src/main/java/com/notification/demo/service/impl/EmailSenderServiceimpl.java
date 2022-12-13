@@ -27,15 +27,17 @@ public class EmailSenderServiceimpl {
 	@Autowired
 	private JavaMailSender mailsender;
 
-	public void sendEmail(String toMail, String subject, String body, String[] cclist, String[] bcclist, String[] file) throws MessagingException {
-		
+	public void sendEmail(String toMail, String subject, String body, String[] cclist, String[] bcclist, String[] file,String username) throws MessagingException {
+		 
+		    String bodymsg=body.replace("{{#cusname}}", username);
+		  //  System.out.println(body.replace("{{#cusname}}", username)+"hiiiii");
 			MimeMessage mimeMessage = mailsender.createMimeMessage();
 			MimeMessageHelper mimemessagehelper = new MimeMessageHelper(mimeMessage, true);
 			mimemessagehelper.setFrom("ranjeetkumaryadvv@gmail.com");
 			mimemessagehelper.setTo(toMail);
 			mimemessagehelper.setCc(cclist);
 			mimemessagehelper.setBcc(bcclist);
-			mimemessagehelper.setText(body);
+			mimemessagehelper.setText(bodymsg);
 			mimemessagehelper.setSubject(subject);
 			for(int i=0;i<file.length;i++) {
 			FileSystemResource filesystemResorce = new FileSystemResource(new File(file[i]));

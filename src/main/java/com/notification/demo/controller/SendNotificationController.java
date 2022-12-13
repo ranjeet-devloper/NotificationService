@@ -45,7 +45,7 @@ public class SendNotificationController {
 					  emailSenderServiceimpl.sendEmail(x.getEmail(),
 							template.getSubject(),
 							template.getMessageBody().toString(),
-							user.getCcto(),user.getBccto(),user.getAttachFile());
+							user.getCcto(),user.getBccto(),user.getAttachFile(),x.getName());
 					
 				} catch (MessagingException e) {
 					throw new EmailException("Internal Server Error");
